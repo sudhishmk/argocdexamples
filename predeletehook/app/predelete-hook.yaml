@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: predelete-demo-job
+  annotations:
+    argocd.argoproj.io/hook: PreDelete
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cleanup
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              echo "🚨 PreDelete hook running"
+              echo "Simulating cleanup..."
+              sleep 10
+              echo "✅ Cleanup finished"
+
