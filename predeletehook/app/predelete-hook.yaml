@@ -16,8 +16,5 @@ spec:
             - sh
             - -c
             - |
-              echo "🚨 PreDelete hook running"
-              echo "Simulating cleanup..."
-              sleep 10
-              echo "✅ Cleanup finished"
-
+              echo "❌ Cleanup failed"
+              exit 1
