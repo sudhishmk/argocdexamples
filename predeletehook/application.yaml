@@ -1,19 +1,20 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: predelete-demo
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/YOUR_ORG/predelete-demo
-    targetRevision: main
-    path: .
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: predelete-demo
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+project: default
+source:
+  repoURL: https://github.com/sudhishmk/argocdexamples.git
+  path: predeletehook/app
+  targetRevision: main
+destination:
+  server: https://kubernetes.default.svc
+  namespace: openshift-gitops
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+    enabled: false
+  syncOptions:
+    - CreateNamespace=true
+ignoreDifferences:
+  - kind: Deployment
+    jsonPointers:
+      - /spec/template/spec/containers/0/image
 
