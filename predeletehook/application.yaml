@@ -13,8 +13,8 @@ syncPolicy:
     enabled: false
   syncOptions:
     - CreateNamespace=true
+    - RespectIgnoreDifferences=true
 ignoreDifferences:
   - kind: Deployment
-    jsonPointers:
-      - /spec/template/spec/containers/0/image
-
+    jqPathExpressions:
+      - .spec.template.spec.containers[] | select(.name == "nginx").image
