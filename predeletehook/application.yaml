@@ -16,5 +16,6 @@ syncPolicy:
     - RespectIgnoreDifferences=true
 ignoreDifferences:
   - kind: Deployment
+    group: apps
     jqPathExpressions:
       - .spec.template.spec.containers[] | select(.name == "nginx").image
